@@ -18,7 +18,8 @@ let moveSound=new Audio('music/move.mp3');
 let musicSound=new Audio('music/music.mp3');
 let lastPaintTime=0;
 let score=0;
-let speed=2;
+let speed=6;
+let board=  document.querySelector(".board");
 
 
 
@@ -37,7 +38,34 @@ function main(currTime){
 
 }
 function isCollide(snakeArray){
+
+//goes out of box;
+let xCordinate=snakeArr[0].x;
+let yCordinate=snakeArr[0].y;
+if(xCordinate==0 || xCordinate==19 || yCordinate==0 || yCordinate==19 ){
+    return true;
+}
+
+
+
+//touches its body
+
+for(let i=1; i<snakeArray.length; i++){
+    if(snakeArr[0].x==snakeArr[i].x && snakeArr[0].y==snakeArr[i].y){
+        return true;
+    }
+}
+
+
 return false;
+}
+
+function generateNewFood(){
+    let n1=Math.floor((Math.random() * 18) + 1);
+    let n2=Math.floor((Math.random() * 18) + 1);
+
+    food.x=n1;
+    food.y=n2;
 }
 
 
@@ -50,20 +78,27 @@ function gameEngine(){
         gameOverSound.play();
         musicSound.pause();
         alert("gameover! press any key to reset the game");
-        snakeArr= {x:13,y:15};
+        snakeArr= [{x:13,y:15}];
         inputDir={x:0,y:0};
+        lastPaintTime=0;
+        food={x:4,y:5};
+        board.innerHTML=" ";
+        
+
     }
-
+        
     //if snake has eaten the food
+    
     if(snakeArr[0].x==food.x && snakeArr[0].y==food.y){
+        score++;
         foodSound.play();
-        snakeArr.unshift({x:inputDir.x+snakeArr[0].x,
-            y:inputDir.y+snakeArr[0].y,});
-
-        // let newHead={
-        //     x:inputDir.x+snakeArr[0].x,
-        //     y:inputDir.y+snakeArr[0].y,
-        // }
+        let newHead={
+            x:inputDir.x+snakeArr[0].x,
+            y:inputDir.y+snakeArr[0].y,
+        }
+        snakeArr.unshift(newHead);
+        
+        generateNewFood();
 
     }
 
@@ -75,11 +110,10 @@ function gameEngine(){
      snakeArr[0].y+=inputDir.y;
 
 
-
+    
 
 
     //displaying the snake
-     let board=  document.querySelector(".board");
      board.innerHTML=" ";    
     snakeArr.forEach((value,index)=>{
             let snakeElement= document.createElement("div");
@@ -121,16 +155,17 @@ document.addEventListener('keydown',function(event){
 inputDir={x:0,y:1};   //snake starts moving down
 
 moveSound.play();
+// musicSound.play();
 switch (event.key){
     case "ArrowUp":
-        console.log("arrowup");
+        
         inputDir.x=0;
         inputDir.y=-1;
 
         break;
 
     case "ArrowDown":
-    console.log("arrowDown");
+   
     inputDir.x=0;
     inputDir.y=1;
     break;
