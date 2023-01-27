@@ -18,7 +18,7 @@ let moveSound=new Audio('music/move.mp3');
 let musicSound=new Audio('music/music.mp3');
 let lastPaintTime=0;
 let score=0;
-let speed=6;
+let speed=5;
 let board=  document.querySelector(".board");
 
 
@@ -79,6 +79,8 @@ function gameEngine(){
         musicSound.pause();
         alert("gameover! press any key to reset the game");
         snakeArr= [{x:13,y:15}];
+        score=0;
+        speed=5;
         inputDir={x:0,y:0};
         lastPaintTime=0;
         food={x:4,y:5};
@@ -91,6 +93,10 @@ function gameEngine(){
     
     if(snakeArr[0].x==food.x && snakeArr[0].y==food.y){
         score++;
+        if(score%3==0){
+            speed++;
+        }
+        
         foodSound.play();
         let newHead={
             x:inputDir.x+snakeArr[0].x,
@@ -117,7 +123,7 @@ function gameEngine(){
      board.innerHTML=" ";    
     snakeArr.forEach((value,index)=>{
             let snakeElement= document.createElement("div");
-
+            scorebox.innerHTML="Score: "+score;
             snakeElement.classList.add("snakeBody");
             if(index==0){
             snakeElement.classList.remove("snakeBody");
@@ -174,14 +180,14 @@ switch (event.key){
     case "ArrowLeft":
     inputDir.x=-1;
     inputDir.y=0;
-    console.log("arrowLeft");
+    
     break;
 
 
     case "ArrowRight":
     inputDir.x=1;
     inputDir.y=0;    
-    console.log("arrowRight");
+    
     break;
     }
 
