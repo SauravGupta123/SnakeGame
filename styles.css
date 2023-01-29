@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&family=Montserrat:wght@100;400;500;900&family=Ubuntu:wght@500&display=swap');
+
 .body{
     display:flex;
     border: solid 2px black;
@@ -38,5 +40,19 @@ background-color: red;
 .snakeBody{
     background-color: purple;
 }
+#scorebox{
+    font-size: 2rem;
+    position:absolute;
+    right: 70px;
+    top:20px;
+    font-family: 'Comic Neue', cursive;
+}
+#Highscorebox{
+    font-size: 2rem;
+    position:absolute;
+    right: 70px;
+    top:60px;
+    font-family: 'Comic Neue', cursive;
 
+}
 

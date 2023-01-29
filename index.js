@@ -16,10 +16,14 @@ let foodSound= new Audio('music/food.mp3');
 let gameOverSound= new Audio('music/gameover.mp3');
 let moveSound=new Audio('music/move.mp3');
 let musicSound=new Audio('music/music.mp3');
+let recordSound= new Audio('music/record.mp3');
 let lastPaintTime=0;
 let score=0;
-let speed=6;
+let highscore=0;
+let speed=5;
 let board=  document.querySelector(".board");
+let isPlayed=false;
+
 
 
 
@@ -79,10 +83,13 @@ function gameEngine(){
         musicSound.pause();
         alert("gameover! press any key to reset the game");
         snakeArr= [{x:13,y:15}];
+        score=0;
+        speed=5;
         inputDir={x:0,y:0};
         lastPaintTime=0;
         food={x:4,y:5};
         board.innerHTML=" ";
+        isPlayed=false;
         
 
     }
@@ -91,6 +98,10 @@ function gameEngine(){
     
     if(snakeArr[0].x==food.x && snakeArr[0].y==food.y){
         score++;
+        if(score%3==0){
+            speed++;
+        }
+        
         foodSound.play();
         let newHead={
             x:inputDir.x+snakeArr[0].x,
@@ -110,13 +121,24 @@ function gameEngine(){
      snakeArr[0].y+=inputDir.y;
 
 
-    
+    //updating highscore
+
+    if(score>highscore){
+        highscore=score;
+        if(!isPlayed){
+
+            recordSound.play();
+            isPlayed=true;
+        }
+    }
 
 
     //displaying the snake
      board.innerHTML=" ";    
     snakeArr.forEach((value,index)=>{
             let snakeElement= document.createElement("div");
+            scorebox.innerHTML="Score: "+score;
+            Highscorebox.innerHTML="highscore: "+highscore;
 
             snakeElement.classList.add("snakeBody");
             if(index==0){
@@ -174,14 +196,14 @@ switch (event.key){
     case "ArrowLeft":
     inputDir.x=-1;
     inputDir.y=0;
-    console.log("arrowLeft");
+    
     break;
 
 
     case "ArrowRight":
     inputDir.x=1;
     inputDir.y=0;    
-    console.log("arrowRight");
+    
     break;
     }
 
