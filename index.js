@@ -16,10 +16,14 @@ let foodSound= new Audio('music/food.mp3');
 let gameOverSound= new Audio('music/gameover.mp3');
 let moveSound=new Audio('music/move.mp3');
 let musicSound=new Audio('music/music.mp3');
+let recordSound= new Audio('music/record.mp3');
 let lastPaintTime=0;
 let score=0;
+let highscore=0;
 let speed=5;
 let board=  document.querySelector(".board");
+let isPlayed=false;
+
 
 
 
@@ -85,6 +89,7 @@ function gameEngine(){
         lastPaintTime=0;
         food={x:4,y:5};
         board.innerHTML=" ";
+        isPlayed=false;
         
 
     }
@@ -116,7 +121,16 @@ function gameEngine(){
      snakeArr[0].y+=inputDir.y;
 
 
-    
+    //updating highscore
+
+    if(score>highscore){
+        highscore=score;
+        if(!isPlayed){
+
+            recordSound.play();
+            isPlayed=true;
+        }
+    }
 
 
     //displaying the snake
@@ -124,6 +138,8 @@ function gameEngine(){
     snakeArr.forEach((value,index)=>{
             let snakeElement= document.createElement("div");
             scorebox.innerHTML="Score: "+score;
+            Highscorebox.innerHTML="highscore: "+highscore;
+
             snakeElement.classList.add("snakeBody");
             if(index==0){
             snakeElement.classList.remove("snakeBody");
