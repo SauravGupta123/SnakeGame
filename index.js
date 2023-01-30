@@ -81,6 +81,7 @@ function gameEngine(){
     if(isCollide(snakeArr)){
         gameOverSound.play();
         musicSound.pause();
+        musicSound.currentTime=0;
         alert("gameover! press any key to reset the game");
         snakeArr= [{x:13,y:15}];
         score=0;
@@ -141,8 +142,15 @@ function gameEngine(){
             Highscorebox.innerHTML="highscore: "+highscore;
 
             snakeElement.classList.add("snakeBody");
+
+            if(index==snakeArr.length-1){
+                
+    
+                snakeElement.classList.add("tail");
+    
+                }
             if(index==0){
-            snakeElement.classList.remove("snakeBody");
+            snakeElement.classList.remove("snakeBody","tail");
 
             snakeElement.classList.add("head");
 
@@ -177,7 +185,10 @@ document.addEventListener('keydown',function(event){
 inputDir={x:0,y:1};   //snake starts moving down
 
 moveSound.play();
-// musicSound.play();
+musicSound=musicSound;
+
+musicSound.play();
+
 switch (event.key){
     case "ArrowUp":
         

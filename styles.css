@@ -45,6 +45,10 @@
     
 }
 
+.tail{
+    transform: scale(.85);
+}
+
 .snakeBody{
     background-color: #6eae00;
      border-radius: 36px;
