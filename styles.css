@@ -20,8 +20,8 @@
     background: linear-gradient(rgb(170,236,170), rgb(236,236,167));
     border: 2px solid black;
     display: grid;
-    grid-template-rows: repeat(18,1fr);
-    grid-template-columns: repeat(18,1fr);
+    grid-template-rows: repeat(25,1fr);
+    grid-template-columns: repeat(25,1fr);
     row-gap: 3px;
     column-gap: 3px;
 
@@ -29,16 +29,32 @@
 
 
 .food{
-    background-color: yellow;
+    background:linear-gradient(#f3c585,rgb(197, 130, 7));
+    border-radius: 36px;
+    border:2px solid black;
+    
 }
 
 .head{
-background-color: red;
+    background-color:#abe40a;
+    border-radius: 36px;
+    transform: scale(1.1);    
+    
+    border:2px solid black;
+    
+    
+}
 
+.tail{
+    transform: scale(.85);
 }
 
 .snakeBody{
-    background-color: purple;
+    background-color: #6eae00;
+     border-radius: 36px;
+    border:2px solid black;
+
+
 }
 #scorebox{
     font-size: 2rem;

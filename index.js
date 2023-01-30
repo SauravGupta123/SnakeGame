@@ -46,7 +46,7 @@ function isCollide(snakeArray){
 //goes out of box;
 let xCordinate=snakeArr[0].x;
 let yCordinate=snakeArr[0].y;
-if(xCordinate==0 || xCordinate==19 || yCordinate==0 || yCordinate==19 ){
+if(xCordinate==0 || xCordinate==26 || yCordinate==0 || yCordinate==26 ){
     return true;
 }
 
@@ -65,8 +65,8 @@ return false;
 }
 
 function generateNewFood(){
-    let n1=Math.floor((Math.random() * 18) + 1);
-    let n2=Math.floor((Math.random() * 18) + 1);
+    let n1=Math.floor((Math.random() * 25) + 1);
+    let n2=Math.floor((Math.random() * 25) + 1);
 
     food.x=n1;
     food.y=n2;
@@ -81,6 +81,7 @@ function gameEngine(){
     if(isCollide(snakeArr)){
         gameOverSound.play();
         musicSound.pause();
+        musicSound.currentTime=0;
         alert("gameover! press any key to reset the game");
         snakeArr= [{x:13,y:15}];
         score=0;
@@ -141,8 +142,15 @@ function gameEngine(){
             Highscorebox.innerHTML="highscore: "+highscore;
 
             snakeElement.classList.add("snakeBody");
+
+            if(index==snakeArr.length-1){
+                
+    
+                snakeElement.classList.add("tail");
+    
+                }
             if(index==0){
-            snakeElement.classList.remove("snakeBody");
+            snakeElement.classList.remove("snakeBody","tail");
 
             snakeElement.classList.add("head");
 
@@ -177,7 +185,10 @@ document.addEventListener('keydown',function(event){
 inputDir={x:0,y:1};   //snake starts moving down
 
 moveSound.play();
-// musicSound.play();
+musicSound=musicSound;
+
+musicSound.play();
+
 switch (event.key){
     case "ArrowUp":
         
