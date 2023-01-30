@@ -46,7 +46,7 @@ function isCollide(snakeArray){
 //goes out of box;
 let xCordinate=snakeArr[0].x;
 let yCordinate=snakeArr[0].y;
-if(xCordinate==0 || xCordinate==19 || yCordinate==0 || yCordinate==19 ){
+if(xCordinate==0 || xCordinate==26 || yCordinate==0 || yCordinate==26 ){
     return true;
 }
 
@@ -65,8 +65,8 @@ return false;
 }
 
 function generateNewFood(){
-    let n1=Math.floor((Math.random() * 18) + 1);
-    let n2=Math.floor((Math.random() * 18) + 1);
+    let n1=Math.floor((Math.random() * 25) + 1);
+    let n2=Math.floor((Math.random() * 25) + 1);
 
     food.x=n1;
     food.y=n2;
